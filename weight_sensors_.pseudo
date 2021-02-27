@@ -1,0 +1,12 @@
+//port variable is a global variable declared in main robot file
+
+set weight_sensor = Weight Sensor at port (ROTS port variable)
+
+weight_limit = 10
+
+function weight_send_signal() do
+    if weight_sensor.weight > weight_limit
+        return true
+    else
+        return false
+end

@@ -1,0 +1,18 @@
+//port variables are global variables declared in main robot file
+
+set right_outer_touch_sensor = Touch Sensor at port (ROTS port variable)
+set left_outer_touch_sensor = Touch Sensor at port (LOTS port variable)
+
+function right_send_signal() do
+    if right_outer_touch_sensor is touching something
+        return true
+    else
+        return false
+end
+
+function left_send_signal() do
+    if left_outer_touch_sensor is touching something
+        return true
+    else
+        return false
+end

@@ -1,0 +1,44 @@
+from drivebase import move
+from touch_sensors import right_send_signal, left_send_signal
+from rolling_pin import turnClockwise
+from weight_sensors import weight_send_signal
+
+function on_start() do //THIS FUNCTION WILL RUN ONE TIME WHEN THE ROBOT TURNS ON
+    //Assuming the robot starts in an orientation parallel to the court perimeter
+    set base_move_speed = 0.5
+    set slow_move_speed = 0.25
+    set fast_move_speed = 0.75
+    set backward_move_speed = -0.25
+end
+
+function check_and_turn() do 
+    if(right_send_signal()):
+        move(backward_move_speed, backward_move_speed)
+        move(slow_move_speed, base_move_speed)
+
+        return true
+    else if(left_send_signal()):
+        move(backward_move_speed, backward_move_speed)
+        move(base_move_speed, slow_move_speed)
+        
+        return true
+
+    return false
+end
+
+function on_run() do //THIS FUNCTION RUNS CONTINOUSLY ONCE THE ROBOT IS TURNED ON
+    turnClockwise(base_move_speed)
+
+    if weight_send_signal():
+        on_end()
+
+    if check_and_turn()
+        move(slow_move_speed, slow_move_speed)
+    else
+        move(fast_move_speed, fast_move_speed)
+end
+
+function on_end() do //THIS FUNCTION WILL RUN ONE TIME WHEN THE ROBOT TURNS OFF
+    move(0, 0)
+    turnClockwise(0)
+end

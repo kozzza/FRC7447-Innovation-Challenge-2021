@@ -1,0 +1,13 @@
+set right_master_motor = Motor using port
+set right_slave_motor = Motor using port2
+
+set left_master_motor = Motor using port3
+set left_slave_motor = Motor using port4
+
+right_slave_motor.follow(right_master_motor)
+left_slave_motor.follow(left_master_motor)
+
+function move(speed_left, speed_right) do
+    right_master_motor.move(speed_right)
+    left_master_motor.move(speed_left)
+end

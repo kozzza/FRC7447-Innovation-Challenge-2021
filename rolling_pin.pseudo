@@ -1,0 +1,5 @@
+set right_spinning_thing = motor using port 5
+
+function turnClockwise(speed) do
+    right_spinning_thing.turnClockwise(speed)
+end
